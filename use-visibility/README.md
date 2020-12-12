@@ -10,7 +10,7 @@ With yarn
 # Usage
 ```js
 import React from 'react';
-import useVisibility from 'use-visibility';
+import {useVisibility} from 'use-visibility';
 
 function CheckElementVisibility() {
   const [isElementVisible,elementRef]=useVisibility(100);
