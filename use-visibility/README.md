@@ -28,7 +28,7 @@ function CheckElementVisibility() {
 # API Reference
 ### `useVisibility`
 ```js
-const isVisible = useVisibility(throttleTime);
+const [isVisible,elementRef] = useVisibility(offset,thrttleTime);
 ```
 Accepts `number of pixels up to the observable element from the top` as first argument.(defaults to 0)
 Accepts `throttle milliseconds` (in ms) as second parameter.(defaults to 100)
