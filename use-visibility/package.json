@@ -1,16 +1,17 @@
 {
   "name": "use-visibility",
-  "version": "1.3.0",
-  "description": "A starter for creating a new React hook",
+  "version": "1.4.0",
+  "description": "React hook to check component visibility",
   "author": {
     "name": "Vanshu Hassija",
-    "email": "hello@colbyfayock.com",
-    "url": "https://twitter.com/colbyfayock"
+    "email": "vanshuhassija@gmail.com",
+    "url": "https://twitter.com/HassijaVanshu"
   },
   "keywords": [
     "react",
     "hooks",
-    "react-hooks"
+    "react-hooks",
+    "custom-react-hooks"
   ],
   "main": "index.js",
   "scripts": {
