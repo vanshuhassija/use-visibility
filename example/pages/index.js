@@ -1,122 +1,51 @@
-import { useVisibility } from '../../use-visibility';
+import { useVisibility } from "../../use-visibility";
 
-import { toCamel } from '../lib/util';
+/**
+ * Check if an element is in viewport
 
-import hookConfig from '../../use-visibility/package.json';
+ * @param {number} offset - Number of pixels up to the observable element from the top
+ * @param {number} throttleMilliseconds - Throttle observable listener, in ms
+ */
 
 export default function Index() {
-  const { name, description, repository = {}, author = {} } = hookConfig;
-
-  const { name: authorName, url: authorUrl } = author;
-
-  const { url: repositoryUrl } = repository;
-  const repositoryExists = typeof repositoryUrl === 'string';
-
-  const repositoryUrlDisplay = repositoryExists && repositoryUrl.split('://')[1];
-
-  const hookSettings = {
-    message: 'Hello, custom hook!'
-  }
-
-  const { message } = useVisibility(hookSettings);
+  const [isFirstVisible, firstRef] = useVisibility(-100);
+  const [isSecondVisible, secondRef] = useVisibility(100);
 
   return (
     <main>
       <style jsx global>{`
-        body {
+        .App {
           font-family: sans-serif;
-          padding: 0;
-          margin: 0;
+          text-align: center;
+        }
+        .text-danger{
+          color:red;
         }
 
-        main {
-          display: flex;
-          flex-direction: column;
-          justify-content: space-between;
-          padding: 1em 0;
-        }
-
-        h1 {
-          font-size: 2em;
-        }
-
-        img {
-          max-width: 100%;
-        }
-
-        pre {
-          overflow: auto;
-          max-height: 15em;
-          background-color: #eeeeee;
-          padding: 1em;
-        }
-
-        section,
-        footer {
-          width: 100%;
-          max-width: 50em;
-          margin: 0 auto;
-        }
-
-        footer p {
-          font-size: .9em;
-        }
-
-        footer p,
-        footer a {
-          color: #546e7a;
+        .App > * {
+          height: 100vh;
         }
       `}</style>
 
-      <section>
+      <div className="App">
+        <h1>useVisibility hook example</h1>
 
-        <h1>{ toCamel(name) }</h1>
+        <div ref={firstRef} className={`${!isFirstVisible&&"text-danger"}`}>
+          <div>
+            Event isFirstVisible will be true after scrolling up by 100 px
+          </div>
+          <div />
+          {isFirstVisible || "In"}Visible
+        </div>
 
-        <p>{ description }</p>
-
-        { repositoryExists && (
-          <p>
-            <a href={repositoryUrl}>
-              { repositoryUrlDisplay }
-            </a>
-          </p>
-        )}
-
-        <h2>How to use</h2>
-
-        <p>
-          Add your instructions here!
-        </p>
-
-        <h2>Examples</h2>
-
-        <h3>Set and grab message</h3>
-        <p>
-          <strong>Input:</strong>
-        </p>
-        <pre>
-          <code>
-{`const hookSettings = {
-  message: 'Hello, custom hook!'
-}
-
-const { message } = useVisibility(hookSettings);`}
-          </code>
-        </pre>
-        <p>
-          <strong>Output:</strong>
-        </p>
-        <p>
-          { message }
-        </p>
-      </section>
-
-      <footer>
-        <p>
-          Made by <a href={authorUrl}>{ authorName }</a>
-        </p>
-      </footer>
+        <div ref={secondRef} className={`${!isSecondVisible&&"text-danger"}`}>
+          <div>
+            Event isSecondVisible will be true if there will be 100 px below the
+            viewport
+          </div>
+          <div>{isSecondVisible || "In"}Visible</div>
+        </div>
+      </div>
     </main>
   );
-
 }
