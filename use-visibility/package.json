@@ -1,6 +1,6 @@
 {
   "name": "use-visibility",
-  "version": "1.4.1",
+  "version": "1.4.3",
   "description": "React hook to check component visibility",
   "author": {
     "name": "Vanshu Hassija",
